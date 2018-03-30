@@ -3,17 +3,17 @@
 #include "mission/mission.h"
 #include "mission/mission.grpc.pb.h"
 
-using grpc::Status;
-using grpc::ServerContext;
+namespace dronecore {
+namespace backend {
 
-using namespace dronecore;
-
-class MissionServiceImpl final : public rpc::mission::MissionService::Service
+template <typename Mission>
+class MissionServiceImpl final : public dronecore::rpc::mission::MissionService::Service
 {
 public:
     MissionServiceImpl(Mission &mission)
-        : mission(mission) {}
+        : _mission(mission) {}
 
+    /*
     Status SendMission(ServerContext *context, const rpc::mission::SendMissionRequest *request,
                        rpc::mission::MissionResult *response) override
     {
@@ -67,7 +67,10 @@ public:
         future_result.get();
         return Status::OK;
     }
-
+*/
 private:
-    Mission &mission;
+    Mission &_mission;
 };
+
+} // namespace backend
+} // namespace dronecore

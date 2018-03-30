@@ -42,7 +42,7 @@ public:
         builder.RegisterService(&actionService);
 
         Mission mission(_dc.device());
-        MissionServiceImpl missionService(mission);
+        MissionServiceImpl<dronecore::Mission> missionService(mission);
         builder.RegisterService(&missionService);
 
         Telemetry telemetry(_dc.device());
